@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="box">
+        <h3>Login/Signup</h3>
+        <div><input class="field" type="text" name="username" placeholder="username" id="username"></div>
+        <div><input class="field" type="text" name="password" placeholder="password" id="password"></div>
+        <button onclick="fun()">Login</button>
+        <p id="success"></p>
+        <p id="error"></p>
+    </div>
+    <style>
+        #box{
+            background-color: beige;
+            padding: 30px;
+            margin:auto;
+            margin-top: 50%;
+        }
+        .field{
+            width: 70%;
+        }
+        div{
+            margin: 5px;
+        }
+        button{
+            margin-left: 25%;
+        }
+        h3{
+            margin-left: 5%;
+        }
+        #error{
+            color:red;
+        }
+        #success{
+            color:green;
+        }
+    </style>
+    <script>
+        function fun(){
+            var x=document.getElementById('para');
+            var uname=document.getElementById('username').value;
+            var pass=document.getElementById('password').value;
+            var er=document.getElementById('error');
+            var suc=document.getElementById('success');
+            // var text='{ "username":"'+uname+'" , "lastName":"'+pass+'" }'
+            // const obj = JSON.parse(text);
+            // console.log(obj);
+            //Getting user details
+            // fetch('http://192.168.0.101:8080/get/'+uname)
+            // .then(Response=>Response.json())
+            // .then(json=>{
+            //     console.log(json);
+            //     // if(json!=null){
+            //     // suc.innerHTML="Login succussful"
+            //     // }else{
+            //     // er.innerHTML="User doesn't exist!"
+            //     // }
+            // })
+            ///////////////////////
+
+            //create user
+            fetch("http://192.168.0.101:8080/post", {
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            //make sure to serialize your JSON body
+            body: JSON.stringify({
+                username: uname,
+                password: pass
+            })
+            })
+            .then( (response) => { 
+            console.log(response.status);
+            });
+            //////////////////////
+        }
+         
+        
+    </script>
+</body>
+</html>
